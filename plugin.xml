@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            name="Opa Editor"
+            extensions="opa"
+            contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
+            class="opaide.editors.opasrc.OpaSrcEditor"
+            id="opaide.editors.OpaSrcEditor">
+      </editor>
+   </extension>
+   
+   <extension point="org.eclipse.core.runtime.preferences">
+     <initializer class="opaide.editors.preferences.PreferencesInitializer" />
+   </extension>
+   <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            id="opaide.workbenchActionSet"
+            label="Opa Ide ActionSet"
+            visible="true">
+         <menu
+               id="opaide.workbenchMenu"
+               label="Opa Ide">
+            <groupMarker
+                  name="contents">
+            </groupMarker>
+            <separator
+                  name="additions">
+            </separator>
+         </menu>
+         <action
+               class="opaide.editors.actions.LaunchOpaCompilationActionDelegate"
+               id="opaide.launchOpaCompilationAction"
+               label="Compile"
+               menubarPath="opaide.workbenchMenu/contents"
+               style="radio"
+               tooltip="Launch an Opa compilation">
+         </action>
+      </actionSet>
+   </extension>
+
+</plugin>
