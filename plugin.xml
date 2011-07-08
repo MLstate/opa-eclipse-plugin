@@ -42,5 +42,31 @@
          </action>
       </actionSet>
    </extension>
+   <extension
+         point="org.eclipse.debug.core.launchConfigurationTypes">
+      <launchConfigurationType
+            delegate="opaide.launching.OpaExecutableConfigurationDelegate"
+            id="opaide.launchConfigurationType"
+            modes="run"
+            name="Opa Application"
+            public="true">
+      </launchConfigurationType>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+      <launchConfigurationTypeImage
+            configTypeID="opaide.launchConfigurationType"
+            icon="icons/opa-logo-orange_(16x16).png"
+            id="opaide.launchConfigurationTypeImage">
+      </launchConfigurationTypeImage>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+      <launchConfigurationTabGroup
+            class="opaide.AbstractLaunchConfigurationTabGroup"
+            id="opaide.launchConfigurationTabGroup"
+            type="opaide.launchConfigurationType">
+      </launchConfigurationTabGroup>
+   </extension>
 
 </plugin>
