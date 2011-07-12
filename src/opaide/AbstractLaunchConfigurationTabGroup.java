@@ -1,6 +1,5 @@
 package opaide;
 
-import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.ui.*;
 import org.eclipse.jdt.debug.ui.launchConfigurations.*;
 import org.eclipse.swt.widgets.Composite;
@@ -12,15 +11,14 @@ public class AbstractLaunchConfigurationTabGroup extends
 
 	public AbstractLaunchConfigurationTabGroup() {
 		super();
-		//OpaIdePlugin.getDefault()
 	}
 
 	@Override
 	public void createTabs(ILaunchConfigurationDialog dialog, String mode) {
-		// TODO Auto-generated method stub
 		ILaunchConfigurationTab[] tabs = new ILaunchConfigurationTab[] {
-				new org.eclipse.jdt.debug.ui.launchConfigurations.JavaMainTab(),
-				new org.eclipse.jdt.debug.ui.launchConfigurations.JavaArgumentsTab(),
+				//new org.eclipse.jdt.debug.ui.launchConfigurations.JavaMainTab(),
+				new LaunchConfigurationTab1(),
+				//new org.eclipse.jdt.debug.ui.launchConfigurations.JavaArgumentsTab(),
 		};
 		
 		setTabs(tabs);
@@ -28,7 +26,6 @@ public class AbstractLaunchConfigurationTabGroup extends
 
 	@Override
 	public ILaunchConfigurationTab[] getTabs() {
-		// TODO Auto-generated method stub
 		return fTabs;
 	}
 
