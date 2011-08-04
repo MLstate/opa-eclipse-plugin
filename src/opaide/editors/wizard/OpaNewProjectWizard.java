@@ -20,12 +20,12 @@ import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
 import org.eclipse.ui.wizards.newresource.BasicNewProjectResourceWizard;
 
 
-public class OpaNewWizard extends Wizard implements INewWizard, IExecutableExtension {
+public class OpaNewProjectWizard extends Wizard implements INewWizard, IExecutableExtension {
 	
 	private BasicNewProjectResourceWizard basicWizard;
 	//private JavaMainTab j = new org.eclipse.jdt.debug.ui.launchConfigurations.JavaMainTab();
 
-	public OpaNewWizard() {
+	public OpaNewProjectWizard() {
 		super();
 		this.basicWizard = new BasicNewProjectResourceWizard();
 	}

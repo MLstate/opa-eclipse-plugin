@@ -187,7 +187,7 @@
       </category>
       <wizard
             category="opaide.editors.wizard.MyWizard"
-            class="opaide.editors.wizard.OpaNewWizard"
+            class="opaide.editors.wizard.OpaNewProjectWizard"
             icon="icons/opa-logo-bleu_(16x16).png"
             id="opaide.wizard1"
             name="Opa Project"
