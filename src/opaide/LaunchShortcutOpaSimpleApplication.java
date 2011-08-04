@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 
 import opaide.editors.actions.RunACompilation;
-import opaide.editors.config.BinCompiler;
+import opaide.editors.config.OpaBinCompiler;
 import opaide.editors.opasrc.OpaSrcEditor;
 
 import org.eclipse.core.resources.IProject;

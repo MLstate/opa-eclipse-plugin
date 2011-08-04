@@ -3,7 +3,7 @@ package opaide;
 import java.io.Console;
 import java.util.HashMap;
 
-import opaide.editors.config.BinCompiler;
+import opaide.editors.config.OpaBinCompiler;
 import opaide.editors.messages.IOpaMessageListener;
 import opaide.editors.messages.OpaMessagesBank;
 import opaide.editors.messages.ast.OpaErrorMessage;
@@ -30,7 +30,7 @@ public class OpaIdePlugin extends AbstractUIPlugin {
 	private static OpaIdePlugin plugin;
 	private static MessageConsole console;
 	
-	private BinCompiler binCompiler;
+	private OpaBinCompiler opaBinCompiler;
 	private PreferencesInitializer prefs;
 		
 	/**
@@ -48,7 +48,7 @@ public class OpaIdePlugin extends AbstractUIPlugin {
 		super.start(context);
 		plugin = this;
 		this.prefs = new PreferencesInitializer();
-		this.binCompiler = new BinCompiler(this.prefs);
+		this.opaBinCompiler = new OpaBinCompiler(this.prefs);
 		
 		IConsoleManager conMan = ConsolePlugin.getDefault().getConsoleManager();
 		MessageConsole myConsole = new MessageConsole("Opa output", null);
@@ -76,8 +76,8 @@ public class OpaIdePlugin extends AbstractUIPlugin {
 		return plugin;
 	}
 
-	public BinCompiler getBinCompiler() {
-		return binCompiler;
+	public OpaBinCompiler getBinCompiler() {
+		return opaBinCompiler;
 	}
 
 	public PreferencesInitializer getPrefs() {
