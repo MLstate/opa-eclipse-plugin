@@ -10,9 +10,6 @@
                class="opaide.natures.OpaProjectNature">
          </run>
       </runtime>
-      <builder
-            id="opaide.builder1">
-      </builder>
    </extension>
    <extension
          point="org.eclipse.ui.ide.projectNatureImages">
@@ -196,52 +193,6 @@
             label="label"
             mode="run">
       </launchGroup>
-   </extension>
-   <extension
-         id="sampleBuilder"
-         name="Sample Project Builder"
-         point="org.eclipse.core.resources.builders">
-      <builder
-            hasNature="true">
-         <run
-               class="opaide.builder.SampleBuilder">
-         </run>
-      </builder>
-   </extension>
-   <extension
-         point="org.eclipse.ui.popupMenus">
-      <objectContribution
-            adaptable="true"
-            id="opaide.contribution1"
-            nameFilter="*"
-            objectClass="org.eclipse.core.resources.IProject">
-         <action
-               class="opaide.builder.ToggleNatureAction"
-               enablesFor="+"
-               id="opaide.addRemoveNatureAction"
-               label="Add/Remove Sample Nature"
-               menubarPath="additions">
-         </action>
-      </objectContribution>
-   </extension>
-   <extension
-         id="xmlProblem"
-         name="XML Problem"
-         point="org.eclipse.core.resources.markers">
-      <super
-            type="org.eclipse.core.resources.problemmarker">
-      </super>
-      <persistent
-            value="true">
-      </persistent>
-   </extension>
-   <extension
-         point="org.eclipse.debug.ui.consoleLineTrackers">
-      <consoleLineTracker
-            class="opaide.ConsoleLineTracker1"
-            id="opaide.consoleLineTracker1"
-            processType="opaide.consoleLineTracker1">
-      </consoleLineTracker>
    </extension>
 
 </plugin>
