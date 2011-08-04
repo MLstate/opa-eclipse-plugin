@@ -1,9 +1,10 @@
-package opaide;
+package opaide.editors.launch.shortcut;
 
 import java.io.File;
 import java.util.Arrays;
 import java.util.Iterator;
 
+import opaide.OpaIdePlugin;
 import opaide.editors.actions.RunACompilation;
 import opaide.editors.config.OpaBinCompiler;
 import opaide.editors.opasrc.OpaSrcEditor;

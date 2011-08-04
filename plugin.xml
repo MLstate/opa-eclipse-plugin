@@ -137,7 +137,7 @@
    <extension
          point="org.eclipse.debug.ui.launchShortcuts">
       <shortcut
-            class="opaide.OpaSimpleApplicationLaunchShortcut"
+            class="opaide.editors.launch.shortcut.OpaSimpleApplicationLaunchShortcut"
             icon="icons/opa-logo-vertclair_(16x16).png"
             id="opaide.shortcut1"
             label="Simple Opa Application"
