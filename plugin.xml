@@ -105,6 +105,11 @@
             icon="icons/opa-logo-orange_(16x16).png"
             id="opaide.launchConfigurationTypeImage">
       </launchConfigurationTypeImage>
+      <launchConfigurationTypeImage
+            configTypeID="opaide.OpaProgramBuilderLaunchConfigurationType"
+            icon="icons/opa-logo-orange_(16x16).png"
+            id="opaide.launchConfigurationTypeImage">
+      </launchConfigurationTypeImage>
    </extension>
    <extension
          point="org.eclipse.debug.ui.launchConfigurationTabGroups">
