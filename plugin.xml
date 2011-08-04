@@ -70,7 +70,7 @@
    <extension
          point="org.eclipse.debug.core.launchConfigurationTypes">
       <launchConfigurationType
-            delegate="opaide.editors.launch.OpaClassicConfigurationDelegate"
+            delegate="opaide.editors.launch.configuration.OpaClassicConfigurationDelegate"
             id="opaide.launchConfigurationType"
             modes="run"
             name="Opa Application"
@@ -119,7 +119,7 @@
    <extension
          point="org.eclipse.debug.ui.launchConfigurationTabGroups">
       <launchConfigurationTabGroup
-            class="opaide.editors.launch.OpaClassicLaunchConfigurationTabGroup"
+            class="opaide.editors.launch.configuration.OpaClassicLaunchConfigurationTabGroup"
             id="opaide.launchConfigurationTabGroup"
             type="opaide.launchConfigurationType">
       </launchConfigurationTabGroup>

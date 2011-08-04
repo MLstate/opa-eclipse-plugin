@@ -1,4 +1,4 @@
-package opaide.editors.launch;
+package opaide.editors.launch.configuration;
 
 import java.io.File;
 import java.util.Arrays;
