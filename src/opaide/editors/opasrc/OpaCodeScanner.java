@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import opaide.editors.ColorManager;
-import opaide.preferences.PreferencesInitializer;
-import opaide.preferences.PreferencesInitializer.SavedTextAttribute;
+import opaide.preferences.OpaPreferencesInitializer;
+import opaide.preferences.OpaPreferencesInitializer.SavedTextAttribute;
 
 import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.jface.text.rules.*;
@@ -25,7 +25,7 @@ public class OpaCodeScanner extends RuleBasedScanner {
 	}
 	
 
-	public OpaCodeScanner(PreferencesInitializer styleProvider) {
+	public OpaCodeScanner(OpaPreferencesInitializer styleProvider) {
 		super();
 		
 		List<IRule> rules = new ArrayList<IRule>();

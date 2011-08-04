@@ -5,8 +5,8 @@ import java.util.List;
 
 import opaide.editors.ColorManager;
 import opaide.editors.opasrc.OpaPartitioner.OPA_PARTITION;
-import opaide.preferences.PreferencesInitializer;
-import opaide.preferences.PreferencesInitializer.SavedTextAttribute;
+import opaide.preferences.OpaPreferencesInitializer;
+import opaide.preferences.OpaPreferencesInitializer.SavedTextAttribute;
 
 import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.jface.text.rules.*;
@@ -14,7 +14,7 @@ import org.eclipse.swt.graphics.RGB;
 
 public class OpaCommentBlockScanner extends RuleBasedScanner {
 
-	public OpaCommentBlockScanner(PreferencesInitializer styleProvider) {
+	public OpaCommentBlockScanner(OpaPreferencesInitializer styleProvider) {
 		SavedTextAttribute c = styleProvider.getSavedTextAttribute(OPA_PARTITION.OPA_COMMENT_BLOCK);
 		System.out.println("OpaCommentBlockScanner.OpaCommentBlockScanner()" + " style= " + c.getStyle());
 		IToken stringToken = new Token(new TextAttribute( ColorManager.getColor(c.getColor()), null, c.getStyle()));

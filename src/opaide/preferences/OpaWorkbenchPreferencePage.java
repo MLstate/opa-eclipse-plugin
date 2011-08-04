@@ -20,12 +20,12 @@ import org.eclipse.ui.IWorkbenchPreferencePage;
 import org.eclipse.ui.IWorkbench;
 import opaide.OpaIdePlugin;
 
-public class WorkbenchPreferencePage1 extends FieldEditorPreferencePage implements
+public class OpaWorkbenchPreferencePage extends FieldEditorPreferencePage implements
 		IWorkbenchPreferencePage {
 
 	private IWorkbench workbench;
 
-	public WorkbenchPreferencePage1() {
+	public OpaWorkbenchPreferencePage() {
 		super(org.eclipse.jface.preference.FieldEditorPreferencePage.GRID);
 	}
 	
@@ -43,11 +43,11 @@ public class WorkbenchPreferencePage1 extends FieldEditorPreferencePage implemen
 		tmp.open();
 		*/
 
-		ExecutableFileFieldEditor opaFileFieldEditor = new ExecutableFileFieldEditor(PreferenceConstants.P_OPA_COMPILER_PATH, "Opa compiler:", true, 
+		ExecutableFileFieldEditor opaFileFieldEditor = new ExecutableFileFieldEditor(OpaPreferencesConstants.P_OPA_COMPILER_PATH, "Opa compiler:", true, 
 				FileFieldEditor.VALIDATE_ON_KEY_STROKE, getFieldEditorParent());
 		addField(opaFileFieldEditor);
 		
-		DirectoryFieldEditor opaMLLIBSFieldEditor = new DirectoryFieldEditor(PreferenceConstants.P_OPA_MLSTATELIBS, "MLSTATELIBS env variable:", getFieldEditorParent());
+		DirectoryFieldEditor opaMLLIBSFieldEditor = new DirectoryFieldEditor(OpaPreferencesConstants.P_OPA_MLSTATELIBS, "MLSTATELIBS env variable:", getFieldEditorParent());
 		opaMLLIBSFieldEditor.setEmptyStringAllowed(false);
 		opaMLLIBSFieldEditor.setValidateStrategy(DirectoryFieldEditor.VALIDATE_ON_KEY_STROKE);
 		addField(opaMLLIBSFieldEditor);

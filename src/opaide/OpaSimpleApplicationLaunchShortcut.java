@@ -18,7 +18,7 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.part.FileEditorInput;
 
-public class LaunchShortcutOpaSimpleApplication implements ILaunchShortcut, org.eclipse.debug.ui.actions.ILaunchable {
+public class OpaSimpleApplicationLaunchShortcut implements ILaunchShortcut, org.eclipse.debug.ui.actions.ILaunchable {
 
 	@Override
 	public void launch(ISelection selection, String mode) {

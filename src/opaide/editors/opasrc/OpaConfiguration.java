@@ -6,7 +6,7 @@ import java.util.Iterator;
 
 import opaide.OpaIdePlugin;
 import opaide.editors.opasrc.OpaPartitioner.OPA_PARTITION;
-import opaide.preferences.PreferencesInitializer;
+import opaide.preferences.OpaPreferencesInitializer;
 
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.runtime.CoreException;
@@ -40,7 +40,7 @@ public class OpaConfiguration extends SourceViewerConfiguration {
 		PresentationReconciler reconciler = new PresentationReconciler();
 		reconciler.setDocumentPartitioning(getConfiguredDocumentPartitioning(sourceViewer));
 		
-		PreferencesInitializer styleProvider = OpaIdePlugin.getDefault().getPrefs();
+		OpaPreferencesInitializer styleProvider = OpaIdePlugin.getDefault().getPrefs();
 		
 		DefaultDamagerRepairer dr = new DefaultDamagerRepairer(new OpaCodeScanner(styleProvider));
         reconciler.setDamager(dr, IDocument.DEFAULT_CONTENT_TYPE);

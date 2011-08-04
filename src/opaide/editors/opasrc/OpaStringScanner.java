@@ -5,8 +5,8 @@ import java.util.List;
 
 import opaide.editors.ColorManager;
 import opaide.editors.opasrc.OpaPartitioner.OPA_PARTITION;
-import opaide.preferences.PreferencesInitializer;
-import opaide.preferences.PreferencesInitializer.SavedTextAttribute;
+import opaide.preferences.OpaPreferencesInitializer;
+import opaide.preferences.OpaPreferencesInitializer.SavedTextAttribute;
 
 import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.jface.text.rules.*;
@@ -14,7 +14,7 @@ import org.eclipse.swt.graphics.RGB;
 
 public class OpaStringScanner extends RuleBasedScanner {
 
-	public OpaStringScanner(PreferencesInitializer styleProvider) {
+	public OpaStringScanner(OpaPreferencesInitializer styleProvider) {
 		SavedTextAttribute c = styleProvider.getSavedTextAttribute(OPA_PARTITION.OPA_STRING);
 		System.out.println("OpaStringScanner.OpaStringScanner()" + " style= " + c.getStyle());
 		IToken stringToken = new Token(new TextAttribute( ColorManager.getColor(c.getColor()), null, c.getStyle() ));

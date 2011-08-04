@@ -1,11 +1,11 @@
 package opaide.editors.config;
 
 import java.io.File;
-import opaide.preferences.PreferencesInitializer;
+import opaide.preferences.OpaPreferencesInitializer;
 
 public class OpaBinCompiler {
-	private PreferencesInitializer prefs;
-	public OpaBinCompiler(PreferencesInitializer prefs) {
+	private OpaPreferencesInitializer prefs;
+	public OpaBinCompiler(OpaPreferencesInitializer prefs) {
 		this.prefs = prefs;
 	}
 	public File getFile() {

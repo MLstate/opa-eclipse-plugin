@@ -32,12 +32,12 @@
    </extension>
    
    <extension point="org.eclipse.core.runtime.preferences">
-     <initializer class="opaide.preferences.PreferencesInitializer" />
+     <initializer class="opaide.preferences.OpaPreferencesInitializer" />
    </extension>
    <extension
          point="org.eclipse.ui.preferencePages">
       <page
-            class="opaide.preferences.WorkbenchPreferencePage1"
+            class="opaide.preferences.OpaWorkbenchPreferencePage"
             id="opaide.page1"
             name="Opa">
       </page>
@@ -137,7 +137,7 @@
    <extension
          point="org.eclipse.debug.ui.launchShortcuts">
       <shortcut
-            class="opaide.LaunchShortcutOpaSimpleApplication"
+            class="opaide.OpaSimpleApplicationLaunchShortcut"
             id="opaide.shortcut1"
             label="Simple Opa Application"
             modes="run">

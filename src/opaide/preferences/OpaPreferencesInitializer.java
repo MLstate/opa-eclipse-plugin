@@ -14,7 +14,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.RGB;
 
-public class PreferencesInitializer extends AbstractPreferenceInitializer {
+public class OpaPreferencesInitializer extends AbstractPreferenceInitializer {
 	
 	public static class SavedTextAttribute {
 		private int style;
@@ -54,10 +54,10 @@ public class PreferencesInitializer extends AbstractPreferenceInitializer {
 
 	private static IPreferenceStore store;
 	
-	public PreferencesInitializer() {
+	public OpaPreferencesInitializer() {
 		if (store == null) {
 			IPreferenceStore store = OpaIdePlugin.getDefault().getPreferenceStore();
-			PreferencesInitializer.store = store;
+			OpaPreferencesInitializer.store = store;
 		}
 	}
 	
@@ -66,7 +66,7 @@ public class PreferencesInitializer extends AbstractPreferenceInitializer {
 		//store.addPropertyChangeListener(this);
 		
 		//store.setDefault(name, "opa");
-		store.setDefault(PreferenceConstants.P_OPA_COMPILER_PATH, "/usr/bin/opa");
+		store.setDefault(OpaPreferencesConstants.P_OPA_COMPILER_PATH, "/usr/bin/opa");
 				
 		for (OPA_PARTITION p : OPA_PARTITION.values()) {
 			switch (p) {
@@ -106,11 +106,11 @@ public class PreferencesInitializer extends AbstractPreferenceInitializer {
 	}
 
 	public String getOpaCompilerPath() {
-		return store.getString(PreferenceConstants.P_OPA_COMPILER_PATH);
+		return store.getString(OpaPreferencesConstants.P_OPA_COMPILER_PATH);
 	}
 	
 	public String getOpaMLSTATELIBS() {
-		return store.getString(PreferenceConstants.P_OPA_MLSTATELIBS);
+		return store.getString(OpaPreferencesConstants.P_OPA_MLSTATELIBS);
 	}
 
 }

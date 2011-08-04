@@ -9,7 +9,7 @@ import opaide.editors.messages.OpaMessagesBank;
 import opaide.editors.messages.ast.OpaErrorMessage;
 import opaide.editors.messages.ast.OpaMessage;
 import opaide.editors.messages.ast.OpaNewCompilationLaunched;
-import opaide.preferences.PreferencesInitializer;
+import opaide.preferences.OpaPreferencesInitializer;
 
 import org.eclipse.ui.console.ConsolePlugin;
 import org.eclipse.ui.console.IConsole;
@@ -31,7 +31,7 @@ public class OpaIdePlugin extends AbstractUIPlugin {
 	private static MessageConsole console;
 	
 	private OpaBinCompiler opaBinCompiler;
-	private PreferencesInitializer prefs;
+	private OpaPreferencesInitializer prefs;
 		
 	/**
 	 * The constructor
@@ -47,7 +47,7 @@ public class OpaIdePlugin extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
-		this.prefs = new PreferencesInitializer();
+		this.prefs = new OpaPreferencesInitializer();
 		this.opaBinCompiler = new OpaBinCompiler(this.prefs);
 		
 		IConsoleManager conMan = ConsolePlugin.getDefault().getConsoleManager();
@@ -80,7 +80,7 @@ public class OpaIdePlugin extends AbstractUIPlugin {
 		return opaBinCompiler;
 	}
 
-	public PreferencesInitializer getPrefs() {
+	public OpaPreferencesInitializer getPrefs() {
 		return prefs;
 	}
 	
