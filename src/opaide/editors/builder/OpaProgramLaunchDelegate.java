@@ -1,4 +1,4 @@
-package opaide;
+package opaide.editors.builder;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -16,6 +16,7 @@ import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
 
+import opaide.OpaIdePlugin;
 import opaide.editors.messages.OpaMessagesFromStream;
 
 import org.eclipse.core.resources.IProject;

@@ -78,14 +78,14 @@
       </launchConfigurationType>
       <launchConfigurationType
             category="org.eclipse.ui.externaltools"
-            delegate="opaide.OpaProgramLaunchDelegate"
+            delegate="opaide.editors.builder.OpaProgramLaunchDelegate"
             id="opaide.OpaProgramLaunchConfigurationType"
             modes="run"
             name="Opa Program1">
       </launchConfigurationType>
       <launchConfigurationType
             category="org.eclipse.ui.externaltools.builder"
-            delegate="opaide.OpaProgramLaunchDelegate"
+            delegate="opaide.editors.builder.OpaProgramLaunchDelegate"
             id="opaide.OpaProgramBuilderLaunchConfigurationType"
             modes="run"
             name="Opa Program2">
@@ -129,7 +129,7 @@
             type="opaide.OpaProgramLaunchConfigurationType">
       </launchConfigurationTabGroup>
       <launchConfigurationTabGroup
-            class="opaide.OpaProgramBuilderTabGroup"
+            class="opaide.editors.builder.OpaProgramBuilderTabGroup"
             id="opaide.OpaLaunchConfigurationTabGroup.program.builder"
             type="opaide.OpaProgramBuilderLaunchConfigurationType">
       </launchConfigurationTabGroup>
@@ -138,6 +138,7 @@
          point="org.eclipse.debug.ui.launchShortcuts">
       <shortcut
             class="opaide.OpaSimpleApplicationLaunchShortcut"
+            icon="icons/opa-logo-vertclair_(16x16).png"
             id="opaide.shortcut1"
             label="Simple Opa Application"
             modes="run">
