@@ -102,12 +102,17 @@
          point="org.eclipse.debug.ui.launchConfigurationTypeImages">
       <launchConfigurationTypeImage
             configTypeID="opaide.launchConfigurationType"
-            icon="icons/opa-logo-orange_(16x16).png"
+            icon="icons/opa-logo-vertclair_(16x16).png"
+            id="opaide.launchConfigurationTypeImage">
+      </launchConfigurationTypeImage>
+      <launchConfigurationTypeImage
+            configTypeID="opaide.OpaProgramLaunchConfigurationType"
+            icon="icons/opa-logo-jauneclair_(16x16).png"
             id="opaide.launchConfigurationTypeImage">
       </launchConfigurationTypeImage>
       <launchConfigurationTypeImage
             configTypeID="opaide.OpaProgramBuilderLaunchConfigurationType"
-            icon="icons/opa-logo-orange_(16x16).png"
+            icon="icons/opa-logo-voilet_(16x16).png"
             id="opaide.launchConfigurationTypeImage">
       </launchConfigurationTypeImage>
    </extension>
@@ -183,7 +188,7 @@
       <wizard
             category="opaide.editors.wizard.MyWizard"
             class="opaide.editors.wizard.OpaNewWizard"
-            icon="icons/opa-logo-orange_(16x16).png"
+            icon="icons/opa-logo-bleu_(16x16).png"
             id="opaide.wizard1"
             name="Opa Project"
             project="true">
