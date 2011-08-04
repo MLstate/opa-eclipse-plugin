@@ -1,8 +1,20 @@
 package opaide;
 
-import opaide.editors.config.BinCompiler;
-import opaide.editors.preferences.PreferencesInitializer;
+import java.io.Console;
+import java.util.HashMap;
 
+import opaide.editors.config.BinCompiler;
+import opaide.editors.messages.IOpaMessageListener;
+import opaide.editors.messages.OpaMessagesBank;
+import opaide.editors.messages.ast.OpaErrorMessage;
+import opaide.editors.messages.ast.OpaMessage;
+import opaide.editors.messages.ast.OpaNewCompilationLaunched;
+import opaide.preferences.PreferencesInitializer;
+
+import org.eclipse.ui.console.ConsolePlugin;
+import org.eclipse.ui.console.IConsole;
+import org.eclipse.ui.console.IConsoleManager;
+import org.eclipse.ui.console.MessageConsole;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -16,10 +28,11 @@ public class OpaIdePlugin extends AbstractUIPlugin {
 
 	// The shared instance
 	private static OpaIdePlugin plugin;
+	private static MessageConsole console;
 	
 	private BinCompiler binCompiler;
 	private PreferencesInitializer prefs;
-	
+		
 	/**
 	 * The constructor
 	 */
@@ -36,6 +49,12 @@ public class OpaIdePlugin extends AbstractUIPlugin {
 		plugin = this;
 		this.prefs = new PreferencesInitializer();
 		this.binCompiler = new BinCompiler(this.prefs);
+		
+		IConsoleManager conMan = ConsolePlugin.getDefault().getConsoleManager();
+		MessageConsole myConsole = new MessageConsole("Opa output", null);
+		conMan.addConsoles(new IConsole[]{ myConsole });
+		this.console = myConsole;
+
 	}
 
 	/*
@@ -44,6 +63,7 @@ public class OpaIdePlugin extends AbstractUIPlugin {
 	 */
 	public void stop(BundleContext context) throws Exception {
 		plugin = null;
+		console = null;
 		super.stop(context);
 	}
 
@@ -63,5 +83,12 @@ public class OpaIdePlugin extends AbstractUIPlugin {
 	public PreferencesInitializer getPrefs() {
 		return prefs;
 	}
-
+	
+	public static MessageConsole getConsole() {
+		return console;
+	}
+	
+	private OpaMessagesBank myOpaMessagesBank = new OpaMessagesBank();	
+	public OpaMessagesBank getOpaMessagesBank(){ return myOpaMessagesBank; };
+	
 }

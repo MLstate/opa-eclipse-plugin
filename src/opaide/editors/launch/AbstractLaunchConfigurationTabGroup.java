@@ -1,4 +1,5 @@
-package opaide;
+package opaide.editors.launch;
+
 
 import org.eclipse.debug.ui.*;
 import org.eclipse.jdt.debug.ui.launchConfigurations.*;
@@ -15,19 +16,21 @@ public class AbstractLaunchConfigurationTabGroup extends
 
 	@Override
 	public void createTabs(ILaunchConfigurationDialog dialog, String mode) {
+		LaunchConfigurationTab1 tmp = new LaunchConfigurationTab1();
 		ILaunchConfigurationTab[] tabs = new ILaunchConfigurationTab[] {
 				//new org.eclipse.jdt.debug.ui.launchConfigurations.JavaMainTab(),
-				new LaunchConfigurationTab1(),
+				tmp,
 				//new org.eclipse.jdt.debug.ui.launchConfigurations.JavaArgumentsTab(),
 		};
-		
 		setTabs(tabs);
+		//tmp.activated(workingCopy)
 	}
 
 	@Override
 	public ILaunchConfigurationTab[] getTabs() {
 		return fTabs;
 	}
+	
 
 
 }

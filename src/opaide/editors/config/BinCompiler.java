@@ -2,7 +2,7 @@ package opaide.editors.config;
 
 import java.io.File;
 
-import opaide.editors.preferences.PreferencesInitializer;
+import opaide.preferences.PreferencesInitializer;
 
 public class BinCompiler {
 	

@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import opaide.editors.ColorManager;
-import opaide.editors.preferences.PreferencesInitializer;
-import opaide.editors.preferences.PreferencesInitializer.SavedTextAttribute;
+import opaide.preferences.PreferencesInitializer;
+import opaide.preferences.PreferencesInitializer.SavedTextAttribute;
 
 import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.jface.text.rules.*;

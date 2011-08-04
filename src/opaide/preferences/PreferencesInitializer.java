@@ -1,4 +1,4 @@
-package opaide.editors.preferences;
+package opaide.preferences;
 
 import opaide.OpaIdePlugin;
 import opaide.editors.opasrc.OpaCodeScanner.CODE;
@@ -66,6 +66,7 @@ public class PreferencesInitializer extends AbstractPreferenceInitializer {
 		//store.addPropertyChangeListener(this);
 		
 		//store.setDefault(name, "opa");
+		store.setDefault(PreferenceConstants.P_OPA_COMPILER_PATH, "/usr/bin/opa");
 				
 		for (OPA_PARTITION p : OPA_PARTITION.values()) {
 			switch (p) {
@@ -105,7 +106,11 @@ public class PreferencesInitializer extends AbstractPreferenceInitializer {
 	}
 
 	public String getOpaCompilerPath() {
-		return "/var/tmp/geoffroy/mlstatelibs/current/bin/opa";
+		return store.getString(PreferenceConstants.P_OPA_COMPILER_PATH);
+	}
+	
+	public String getOpaMLSTATELIBS() {
+		return store.getString(PreferenceConstants.P_OPA_MLSTATELIBS);
 	}
 
 }

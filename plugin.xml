@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
+   <extension
+         id="opaide.natures.OpaProjectNature"
+         name="Sample Project Nature"
+         point="org.eclipse.core.resources.natures">
+      <runtime>
+         <run
+               class="opaide.natures.OpaProjectNature">
+         </run>
+      </runtime>
+      <builder
+            id="opaide.builder1">
+      </builder>
+   </extension>
+   <extension
+         point="org.eclipse.ui.ide.projectNatureImages">
+      <image
+            icon="icons/opa-logo-orange_(16x16).png"
+            id="opaide.natureImage"
+            natureId="opaide.natures.OpaProjectNature">
+      </image>
+   </extension>
 
    <extension
          point="org.eclipse.ui.editors">
@@ -14,7 +35,15 @@
    </extension>
    
    <extension point="org.eclipse.core.runtime.preferences">
-     <initializer class="opaide.editors.preferences.PreferencesInitializer" />
+     <initializer class="opaide.preferences.PreferencesInitializer" />
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="opaide.preferences.WorkbenchPreferencePage1"
+            id="opaide.page1"
+            name="Opa">
+      </page>
    </extension>
    <extension
          point="org.eclipse.ui.actionSets">
@@ -33,24 +62,44 @@
             </separator>
          </menu>
          <action
-               class="opaide.editors.actions.LaunchOpaCompilationActionDelegate"
-               id="opaide.launchOpaCompilationAction"
-               label="Compile"
+               class="opaide.editors.actions.SeeAboutOpa"
+               id="opaide.seeAboutOpa"
+               label="About"
                menubarPath="opaide.workbenchMenu/contents"
-               style="radio"
-               tooltip="Launch an Opa compilation">
+               tooltip="About Opa">
          </action>
       </actionSet>
    </extension>
    <extension
          point="org.eclipse.debug.core.launchConfigurationTypes">
       <launchConfigurationType
-            delegate="opaide.launching.OpaExecutableConfigurationDelegate"
+            delegate="opaide.editors.launch.OpaExecutableConfigurationDelegate"
             id="opaide.launchConfigurationType"
             modes="run"
             name="Opa Application"
             public="true">
       </launchConfigurationType>
+      <launchConfigurationType
+            category="org.eclipse.ui.externaltools"
+            delegate="opaide.OpaProgramLaunchDelegate"
+            id="opaide.OpaProgramLaunchConfigurationType"
+            modes="run"
+            name="Opa Program1">
+      </launchConfigurationType>
+      <launchConfigurationType
+            category="org.eclipse.ui.externaltools.builder"
+            delegate="opaide.OpaProgramLaunchDelegate"
+            id="opaide.OpaProgramBuilderLaunchConfigurationType"
+            modes="run"
+            name="Opa Program2">
+      </launchConfigurationType>
+   </extension>
+   <extension
+         point="org.eclipse.ui.externaltools.configurationDuplicationMaps">
+     <configurationMap
+            sourceType="OpaProgramLaunchConfigurationType"
+            builderType="OpaProgramBuilderLaunchConfigurationType">
+     </configurationMap>
    </extension>
    <extension
          point="org.eclipse.debug.ui.launchConfigurationTypeImages">
@@ -63,10 +112,136 @@
    <extension
          point="org.eclipse.debug.ui.launchConfigurationTabGroups">
       <launchConfigurationTabGroup
-            class="opaide.AbstractLaunchConfigurationTabGroup"
+            class="opaide.editors.launch.AbstractLaunchConfigurationTabGroup"
             id="opaide.launchConfigurationTabGroup"
             type="opaide.launchConfigurationType">
       </launchConfigurationTabGroup>
+      <launchConfigurationTabGroup
+            class="opaide.OpaProgramTabGroup"
+            id="opaide.OpaLaunchConfigurationTabGroup.program"
+            type="opaide.OpaProgramLaunchConfigurationType">
+      </launchConfigurationTabGroup>
+      <launchConfigurationTabGroup
+            class="opaide.OpaProgramBuilderTabGroup"
+            id="opaide.OpaLaunchConfigurationTabGroup.program.builder"
+            type="opaide.OpaProgramBuilderLaunchConfigurationType">
+      </launchConfigurationTabGroup>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchShortcuts">
+      <shortcut
+            class="opaide.LaunchShortcutOpaSimpleApplication"
+            id="opaide.shortcut1"
+            label="Simple Opa Application"
+            modes="run">
+         <contextualLaunch>
+            <enablement>
+               <or>
+                  <with
+                        variable="selection">
+                     <count
+                           value="1">
+                     </count>
+                     <iterate>
+                        <instanceof
+                              value="org.eclipse.core.resources.IFile">
+                        </instanceof>
+                        <test
+                              property="org.eclipse.debug.ui.matchesPattern"
+                              value="*.opa">
+                        </test>
+                     </iterate>
+                  </with>
+                  <!--<with
+                        variable="activeEditor">
+                     <instanceof
+                           value="opaide.editors.opasrc.OpaSrcEditor">
+                     </instanceof>
+                  </with>-->
+                  <with
+                        variable="activePart">
+                     <instanceof
+                           value="org.eclipse.ui.IEditorPart">
+                     </instanceof>
+                     <instanceof
+                           value="opaide.editors.opasrc.OpaSrcEditor">
+                     </instanceof>
+                  </with>
+               </or>
+            </enablement>
+         </contextualLaunch>
+      </shortcut>
+   </extension>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category 
+          id="opaide.editors.wizard.MyWizard" 
+          name="Opa">
+      </category>
+      <wizard
+            category="opaide.editors.wizard.MyWizard"
+            class="opaide.editors.wizard.OpaNewWizard"
+            icon="icons/opa-logo-orange_(16x16).png"
+            id="opaide.wizard1"
+            name="Opa Project"
+            project="true">
+      </wizard>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchGroups">
+      <launchGroup
+            bannerImage="opaide.launchGroup1"
+            id="opaide.launchGroup1"
+            image="opaide.launchGroup1"
+            label="label"
+            mode="run">
+      </launchGroup>
+   </extension>
+   <extension
+         id="sampleBuilder"
+         name="Sample Project Builder"
+         point="org.eclipse.core.resources.builders">
+      <builder
+            hasNature="true">
+         <run
+               class="opaide.builder.SampleBuilder">
+         </run>
+      </builder>
+   </extension>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="true"
+            id="opaide.contribution1"
+            nameFilter="*"
+            objectClass="org.eclipse.core.resources.IProject">
+         <action
+               class="opaide.builder.ToggleNatureAction"
+               enablesFor="+"
+               id="opaide.addRemoveNatureAction"
+               label="Add/Remove Sample Nature"
+               menubarPath="additions">
+         </action>
+      </objectContribution>
+   </extension>
+   <extension
+         id="xmlProblem"
+         name="XML Problem"
+         point="org.eclipse.core.resources.markers">
+      <super
+            type="org.eclipse.core.resources.problemmarker">
+      </super>
+      <persistent
+            value="true">
+      </persistent>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.consoleLineTrackers">
+      <consoleLineTracker
+            class="opaide.ConsoleLineTracker1"
+            id="opaide.consoleLineTracker1"
+            processType="opaide.consoleLineTracker1">
+      </consoleLineTracker>
    </extension>
 
 </plugin>
