@@ -28,7 +28,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.*;
 
-public class LaunchConfigurationTab1 
+public class OpaClassicLaunchConfigurationTab 
 	//extends org.eclipse.jdt.debug.ui.launchConfigurations.AppletMainTab
 	extends AbstractLaunchConfigurationTab
 	implements ILaunchConfigurationTab {
@@ -176,17 +176,17 @@ public class LaunchConfigurationTab1
 		} else {
 			forWorkingdir = p[0].getLocation().toOSString();
 		}
-		configuration.setAttribute(OpaLaunchConfigurationConstants.ATTR_OPA_WORKING_DIR.toString(), 
+		configuration.setAttribute(OpaClassicLaunchConfigurationConstants.ATTR_OPA_WORKING_DIR.toString(), 
 				forWorkingdir);		
-		configuration.setAttribute(OpaLaunchConfigurationConstants.ATTR_OPA_MAIN_PROGRAM.toString(), 
+		configuration.setAttribute(OpaClassicLaunchConfigurationConstants.ATTR_OPA_MAIN_PROGRAM.toString(), 
 				"opa");
-		configuration.setAttribute(OpaLaunchConfigurationConstants.ATTR_OPA_MAIN_ARGUMENTS.toString(), 
+		configuration.setAttribute(OpaClassicLaunchConfigurationConstants.ATTR_OPA_MAIN_ARGUMENTS.toString(), 
 				"--quiet");
 	}
 
 	@Override
 	public void initializeFrom(ILaunchConfiguration configuration) {
-		for (OpaLaunchConfigurationConstants c : OpaLaunchConfigurationConstants.values()) {
+		for (OpaClassicLaunchConfigurationConstants c : OpaClassicLaunchConfigurationConstants.values()) {
 			try {
 				String tmp = configuration.getAttribute(c.toString(), "");
 				switch (c) {
@@ -210,11 +210,11 @@ public class LaunchConfigurationTab1
 
 	@Override
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
-		configuration.setAttribute(OpaLaunchConfigurationConstants.ATTR_OPA_WORKING_DIR.toString(),
+		configuration.setAttribute(OpaClassicLaunchConfigurationConstants.ATTR_OPA_WORKING_DIR.toString(),
 				fWorkingProjectText.getText());
-		configuration.setAttribute(OpaLaunchConfigurationConstants.ATTR_OPA_MAIN_PROGRAM.toString(),
+		configuration.setAttribute(OpaClassicLaunchConfigurationConstants.ATTR_OPA_MAIN_PROGRAM.toString(),
 				fProgramText.getText());
-		configuration.setAttribute(OpaLaunchConfigurationConstants.ATTR_OPA_MAIN_ARGUMENTS.toString(),
+		configuration.setAttribute(OpaClassicLaunchConfigurationConstants.ATTR_OPA_MAIN_ARGUMENTS.toString(),
 				fArgumentsText.getText());
 	}
 
@@ -230,7 +230,7 @@ public class LaunchConfigurationTab1
 		setErrorMessage(null);
 		boolean result = true;
 		String msg = null;
-		for (OpaLaunchConfigurationConstants c : OpaLaunchConfigurationConstants.values()) {
+		for (OpaClassicLaunchConfigurationConstants c : OpaClassicLaunchConfigurationConstants.values()) {
 			try {
 				String tmp = launchConfig.getAttribute(c.toString(), "");
 				switch (c) {

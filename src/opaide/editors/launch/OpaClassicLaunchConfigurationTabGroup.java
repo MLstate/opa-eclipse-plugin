@@ -5,18 +5,19 @@ import org.eclipse.debug.ui.*;
 import org.eclipse.jdt.debug.ui.launchConfigurations.*;
 import org.eclipse.swt.widgets.Composite;
 
-public class AbstractLaunchConfigurationTabGroup extends
+public class OpaClassicLaunchConfigurationTabGroup extends
 		org.eclipse.debug.ui.AbstractLaunchConfigurationTabGroup implements
 		//org.eclipse.jdt.debug.ui.launchConfigurations.AppletParametersTab implements
+		//extends ProgramBuilderTabGroup
 		ILaunchConfigurationTabGroup {
 
-	public AbstractLaunchConfigurationTabGroup() {
+	public OpaClassicLaunchConfigurationTabGroup() {
 		super();
 	}
 
 	@Override
 	public void createTabs(ILaunchConfigurationDialog dialog, String mode) {
-		LaunchConfigurationTab1 tmp = new LaunchConfigurationTab1();
+		OpaClassicLaunchConfigurationTab tmp = new OpaClassicLaunchConfigurationTab();
 		ILaunchConfigurationTab[] tabs = new ILaunchConfigurationTab[] {
 				//new org.eclipse.jdt.debug.ui.launchConfigurations.JavaMainTab(),
 				tmp,

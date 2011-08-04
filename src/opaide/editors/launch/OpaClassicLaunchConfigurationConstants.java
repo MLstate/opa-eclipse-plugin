@@ -1,6 +1,6 @@
 package opaide.editors.launch;
 
-public enum OpaLaunchConfigurationConstants {
+public enum OpaClassicLaunchConfigurationConstants {
 	
 	ATTR_OPA_WORKING_DIR,
 	ATTR_OPA_MAIN_PROGRAM,

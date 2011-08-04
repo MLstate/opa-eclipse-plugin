@@ -12,14 +12,14 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.debug.core.*;
 import org.eclipse.debug.core.model.*;
 
-public class OpaExecutableConfigurationDelegate extends LaunchConfigurationDelegate implements
+public class OpaClassicConfigurationDelegate extends LaunchConfigurationDelegate implements
 		ILaunchConfigurationDelegate2 {
 
 	@Override
 	public void launch(ILaunchConfiguration configuration, String mode,
 			ILaunch launch, IProgressMonitor monitor) throws CoreException {
 		System.out.println("OpaExecutableConfigurationDelegate.launch()");
-		String workingDir = configuration.getAttribute(OpaLaunchConfigurationConstants.ATTR_OPA_WORKING_DIR.toString(), "");
+		String workingDir = configuration.getAttribute(OpaClassicLaunchConfigurationConstants.ATTR_OPA_WORKING_DIR.toString(), "");
 		IProject project = null;
 		for (IProject p : ResourcesPlugin.getWorkspace().getRoot().getProjects()) {
 			if (p.getLocation().toOSString().equals(workingDir)) {
@@ -27,8 +27,8 @@ public class OpaExecutableConfigurationDelegate extends LaunchConfigurationDeleg
 				break;
 			} 
 		}
-		String execToCall = configuration.getAttribute(OpaLaunchConfigurationConstants.ATTR_OPA_MAIN_PROGRAM.toString(), "opa");
-		String arguments = configuration.getAttribute(OpaLaunchConfigurationConstants.ATTR_OPA_MAIN_ARGUMENTS.toString(), "");
+		String execToCall = configuration.getAttribute(OpaClassicLaunchConfigurationConstants.ATTR_OPA_MAIN_PROGRAM.toString(), "opa");
+		String arguments = configuration.getAttribute(OpaClassicLaunchConfigurationConstants.ATTR_OPA_MAIN_ARGUMENTS.toString(), "");
 		if (project != null) {
 			new RunACompilation(project, execToCall, Arrays.asList(arguments)).run();
 		} else {
