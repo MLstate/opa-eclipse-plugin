@@ -2,7 +2,7 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension
-         id="opaide.natures.OpaProjectNature"
+         id="opaide.natures.OpaProjectNature.id"
          name="Sample Project Nature"
          point="org.eclipse.core.resources.natures">
       <runtime>
@@ -16,7 +16,7 @@
       <image
             icon="icons/opa-logo-orange_(16x16).png"
             id="opaide.natureImage"
-            natureId="opaide.natures.OpaProjectNature">
+            natureId="opaide.natures.OpaProjectNature.id">
       </image>
    </extension>
 

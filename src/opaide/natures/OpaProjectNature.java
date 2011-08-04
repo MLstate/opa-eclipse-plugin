@@ -6,7 +6,7 @@ import org.eclipse.core.runtime.CoreException;
 
 public class OpaProjectNature implements IProjectNature {
 	
-	public static final String NATURE_ID = "opaide.natures.OpaProjectNature"; //$NON-NLS-1$
+	public static final String NATURE_ID = "opaide.natures.OpaProjectNature.id"; //$NON-NLS-1$
 	
 	private IProject project; 
 	
