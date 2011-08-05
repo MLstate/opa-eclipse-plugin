@@ -48,7 +48,7 @@ public enum KEYWORDS implements IWordDetector {
 	}
 	
 	private static Set<Character> allStartingChars;
-	public static Set<Character> getAllStartingChars() {
+	private static Set<Character> getAllStartingChars() {
 		if (allStartingChars == null) {
 			Set <Character> result = new HashSet<Character>();
 			for(KEYWORDS k : KEYWORDS.values()) {
@@ -60,7 +60,7 @@ public enum KEYWORDS implements IWordDetector {
 	}
 	
 	private static Set<Character> allPossibleChars;
-	public static Set<Character> getAllPossibleChars() {
+	private static Set<Character> getAllPossibleChars() {
 		if (allPossibleChars == null) {
 			Set<Character> result = new HashSet<Character>();
 			for(KEYWORDS k : KEYWORDS.values()) {
