@@ -29,6 +29,11 @@ public enum OPAKEYWORDS implements ITextualRep {
 	FALSE,
 	OPEN;
 	
+	@Override
+	public String toString() {
+		return this.getClass().getCanonicalName() + "." + super.toString();
+	}
+	
 	private final EnumImplITextualRep implTextualRep;
 	
 	private OPAKEYWORDS(String textualRep) {
