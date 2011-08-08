@@ -41,7 +41,7 @@ public enum SEPARATORS implements ITextualRep {
 	};
 
 	public static SEPARATORS random() {
-		return EnumRandom.random(values());
+		return EnumImplRandom.random(values());
 	}
 	
 	public String getTextRep() {

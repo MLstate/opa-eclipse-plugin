@@ -2,7 +2,7 @@ package opaide.editors.opasrc;
 
 import java.util.Random;
 
-public class EnumRandom {
+public class EnumImplRandom {
 	
 	private static Random r = new Random();
 	

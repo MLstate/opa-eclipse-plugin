@@ -39,7 +39,7 @@ public enum OPAKEYWORDS implements ITextualRep {
 	};
 
 	public static OPAKEYWORDS random() {
-		return EnumRandom.random(values());
+		return EnumImplRandom.random(values());
 	}
 	
 	public String getTextRep() {
