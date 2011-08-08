@@ -41,8 +41,8 @@ public class OpaCodeScanner extends RuleBasedScanner {
 		
 		{	SavedTextAttribute attrForSeparator = styleProvider.getSavedTextAttribute(CODE.SEPARATOR);
 			IToken separatorsToken = new Token(new TextAttribute( ColorManager.getColor(attrForSeparator.getColor())));
-			WordRule separatorsRule = new WordRule(SEPARATORS.getWordDetector());
-			for (SEPARATORS k : SEPARATORS.values()) {
+			WordRule separatorsRule = new WordRule(OPASEPARATORS.getWordDetector());
+			for (OPASEPARATORS k : OPASEPARATORS.values()) {
 				separatorsRule.addWord(k.getTextRep(), separatorsToken);
 			}
 			rules.add(separatorsRule);

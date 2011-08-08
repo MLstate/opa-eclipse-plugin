@@ -2,7 +2,7 @@ package opaide.editors.opasrc;
 
 import org.eclipse.jface.text.rules.IWordDetector;
 
-public enum SEPARATORS implements ITextualRep {
+public enum OPASEPARATORS implements ITextualRep {
 	PLUS ("+"),
 	STAR ("*"),
 	L_BRACKET ("{"),
@@ -33,14 +33,14 @@ public enum SEPARATORS implements ITextualRep {
 	
 	private final EnumImplITextualRep implTextualRep;
 	
-	private SEPARATORS(String textualRep) {
+	private OPASEPARATORS(String textualRep) {
 		this.implTextualRep = new EnumImplITextualRep(textualRep);
 	}
-	private SEPARATORS() {
+	private OPASEPARATORS() {
 		this.implTextualRep = new EnumImplITextualRep(this);
 	};
 
-	public static SEPARATORS random() {
+	public static OPASEPARATORS random() {
 		return EnumImplRandom.random(values());
 	}
 	
