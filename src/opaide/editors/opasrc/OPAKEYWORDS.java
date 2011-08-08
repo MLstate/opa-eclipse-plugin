@@ -2,7 +2,7 @@ package opaide.editors.opasrc;
 
 import org.eclipse.jface.text.rules.IWordDetector;
 
-public enum KEYWORDS implements IWordDetector {
+public enum OPAKEYWORDS implements IWordDetector {
 	TYPE,
 	IF,
 	MATCH,
@@ -31,10 +31,10 @@ public enum KEYWORDS implements IWordDetector {
 	
 	private final EnumImplIWordDetector sub;
 	
-	private KEYWORDS(String textualRep) {
+	private OPAKEYWORDS(String textualRep) {
 		this.sub = new EnumImplIWordDetector(this, textualRep);
 	}
-	private KEYWORDS() {
+	private OPAKEYWORDS() {
 		this.sub = new EnumImplIWordDetector(this);
 	};
 	
@@ -52,7 +52,7 @@ public enum KEYWORDS implements IWordDetector {
 		return sub.isWordPart(c);
 	}
 
-	public static KEYWORDS random() {
+	public static OPAKEYWORDS random() {
 		return EnumRandom.random(values());
 	}
 	

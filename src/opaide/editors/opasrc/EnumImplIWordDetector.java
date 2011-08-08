@@ -29,7 +29,7 @@ public class EnumImplIWordDetector implements IWordDetector {
 	public static Set<Character> getAllStartingChars() {
 		if (allStartingChars == null) {
 			Set <Character> result = new HashSet<Character>();
-			for(KEYWORDS k : KEYWORDS.values()) {
+			for(OPAKEYWORDS k : OPAKEYWORDS.values()) {
 				result.add(k.getTextRep().charAt(0));
 			};
 			allStartingChars = result;
@@ -41,7 +41,7 @@ public class EnumImplIWordDetector implements IWordDetector {
 	private static Set<Character> getAllPossibleChars() {
 		if (allPossibleChars == null) {
 			Set<Character> result = new HashSet<Character>();
-			for(KEYWORDS k : KEYWORDS.values()) {
+			for(OPAKEYWORDS k : OPAKEYWORDS.values()) {
 				String tmp = k.getTextRep();
 				if (tmp.length() > 1) {
 					for (char c : k.getTextRep().substring(1).toCharArray()) { 

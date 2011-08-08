@@ -32,8 +32,8 @@ public class OpaCodeScanner extends RuleBasedScanner {
 		
 		{	SavedTextAttribute attrForKeyword = styleProvider.getSavedTextAttribute(CODE.KEYWORD);
 			IToken keywordToken = new Token(new TextAttribute( ColorManager.getColor(attrForKeyword.getColor())));
-			WordRule keywordRule = new WordRule(KEYWORDS.random());
-			for (KEYWORDS k : KEYWORDS.values()) {
+			WordRule keywordRule = new WordRule(OPAKEYWORDS.random());
+			for (OPAKEYWORDS k : OPAKEYWORDS.values()) {
 				keywordRule.addWord(k.getTextRep(), keywordToken);
 			}
 			rules.add(keywordRule);
