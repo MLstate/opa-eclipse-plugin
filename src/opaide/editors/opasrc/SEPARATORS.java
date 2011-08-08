@@ -1,8 +1,6 @@
 package opaide.editors.opasrc;
 
-import java.util.HashSet;
 import java.util.Random;
-import java.util.Set;
 
 import org.eclipse.jface.text.rules.IWordDetector;
 
@@ -35,61 +33,30 @@ public enum SEPARATORS implements IWordDetector {
 		return this.getClass().getCanonicalName() + "." + super.toString();
 	}
 	
-	private final String textualRep;
+	private final EnumImplIWordDetector sub;
+	
 	private SEPARATORS(String textualRep) {
-		assert (textualRep != null);
-		assert !(textualRep.isEmpty());
-		this.textualRep = textualRep;
+		this.sub = new EnumImplIWordDetector(this, textualRep);
 	}
 	private SEPARATORS() {
-		this.textualRep = this.name().toLowerCase();
+		this.sub = new EnumImplIWordDetector(this);
 	};
 	
 	public String getTextRep() {
-		return this.textualRep;
+		return sub.getTextRep();
 	}
-	
-	private static Set<Character> allStartingChars;
-	public static Set<Character> getAllStartingChars() {
-		if (allStartingChars == null) {
-			Set <Character> result = new HashSet<Character>();
-			for(SEPARATORS k : SEPARATORS.values()) {
-				result.add(k.getTextRep().charAt(0));
-			};
-			allStartingChars = result;
-		};
-		return allStartingChars;
-	}
-	
-	private static Set<Character> allPossibleChars;
-	public static Set<Character> getAllPossibleChars() {
-		if (allPossibleChars == null) {
-			Set<Character> result = new HashSet<Character>();
-			for(SEPARATORS k : SEPARATORS.values()) {
-				String tmp = k.getTextRep();
-				if (tmp.length() > 1) {
-					for (char c : k.getTextRep().substring(1).toCharArray()) { 
-						result.add(new Character(c)); 
-					};
-				};
-			};
-			allPossibleChars = result;
-		};
-		return allPossibleChars;
-	}
-	
+		
 	public static SEPARATORS random() {
 		Random r = new Random();
 		return values()[r.nextInt(values().length)];
 	}
 	
-	@Override
 	public boolean isWordStart(char c) {
-		return getAllStartingChars().contains(new Character(c));
+		return sub.isWordStart(c);
 	}
-	@Override
+
 	public boolean isWordPart(char c) {
-		return getAllPossibleChars().contains(new Character(c));
+		return sub.isWordPart(c);
 	}
 
 }
