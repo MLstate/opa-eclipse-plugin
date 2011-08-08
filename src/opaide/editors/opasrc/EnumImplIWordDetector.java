@@ -7,60 +7,35 @@ import org.eclipse.jface.text.rules.IWordDetector;
 
 public class EnumImplIWordDetector implements IWordDetector {
 	
-	private final String textualRep ;
-	private Enum e;
+	private final Set<Character> allStartingChars;
+	private final Set<Character> allPossibleChars;
 	
-	public EnumImplIWordDetector(Enum e) {
-		this.e = e;
-		this.textualRep = e.name().toLowerCase();
-	};
-	public EnumImplIWordDetector(Enum e, String textualRep) {
-		this.e = e;
-		assert (textualRep != null);
-		assert !(textualRep.isEmpty());
-		this.textualRep = textualRep;
-	}
-	
-	public String getTextRep() {
-		return this.textualRep;
-	}
-	
-	private static Set<Character> allStartingChars;
-	public static Set<Character> getAllStartingChars() {
-		if (allStartingChars == null) {
-			Set <Character> result = new HashSet<Character>();
-			for(OPAKEYWORDS k : OPAKEYWORDS.values()) {
-				result.add(k.getTextRep().charAt(0));
-			};
-			allStartingChars = result;
+	public EnumImplIWordDetector(ITextualRep[] values) {
+
+		Set <Character> tmpAllStartingChars = new HashSet<Character>();
+		for(ITextualRep k : values) {
+			tmpAllStartingChars.add(k.getTextRep().charAt(0));
 		};
-		return allStartingChars;
-	}
-	
-	private static Set<Character> allPossibleChars;
-	private static Set<Character> getAllPossibleChars() {
-		if (allPossibleChars == null) {
-			Set<Character> result = new HashSet<Character>();
-			for(OPAKEYWORDS k : OPAKEYWORDS.values()) {
-				String tmp = k.getTextRep();
-				if (tmp.length() > 1) {
-					for (char c : k.getTextRep().substring(1).toCharArray()) { 
-						result.add(new Character(c)); 
-					};
+		this.allStartingChars = tmpAllStartingChars;
+		
+		Set <Character> tmpAllPossibleChars = new HashSet<Character>();
+		for(ITextualRep k : values) {
+			String tmp = k.getTextRep();
+			if (tmp.length() > 1) {
+				for (char c : k.getTextRep().substring(1).toCharArray()) { 
+					tmpAllPossibleChars.add(new Character(c)); 
 				};
 			};
-			allPossibleChars = result;
 		};
-		return allPossibleChars;
+		this.allPossibleChars = tmpAllPossibleChars;
 	}
 	
 	@Override
 	public boolean isWordStart(char c) {
-		return getAllStartingChars().contains(new Character(c));
+		return allStartingChars.contains(new Character(c));
 	}
 	@Override
 	public boolean isWordPart(char c) {
-		return getAllPossibleChars().contains(new Character(c));
+		return allPossibleChars.contains(new Character(c));
 	}
-
 }

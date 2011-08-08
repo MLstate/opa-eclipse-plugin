@@ -1,10 +1,8 @@
 package opaide.editors.opasrc;
 
-import java.util.Random;
-
 import org.eclipse.jface.text.rules.IWordDetector;
 
-public enum SEPARATORS implements IWordDetector {
+public enum SEPARATORS implements ITextualRep {
 	PLUS ("+"),
 	STAR ("*"),
 	L_BRACKET ("{"),
@@ -33,29 +31,27 @@ public enum SEPARATORS implements IWordDetector {
 		return this.getClass().getCanonicalName() + "." + super.toString();
 	}
 	
-	private final EnumImplIWordDetector sub;
+	private final EnumImplITextualRep implTextualRep;
 	
 	private SEPARATORS(String textualRep) {
-		this.sub = new EnumImplIWordDetector(this, textualRep);
+		this.implTextualRep = new EnumImplITextualRep(textualRep);
 	}
 	private SEPARATORS() {
-		this.sub = new EnumImplIWordDetector(this);
+		this.implTextualRep = new EnumImplITextualRep(this);
 	};
-	
-	public String getTextRep() {
-		return sub.getTextRep();
-	}
-	
-	public boolean isWordStart(char c) {
-		return sub.isWordStart(c);
-	}
 
-	public boolean isWordPart(char c) {
-		return sub.isWordPart(c);
-	}
-	
 	public static SEPARATORS random() {
 		return EnumRandom.random(values());
+	}
+	
+	public String getTextRep() {
+		return this.implTextualRep.getTextRep();
+	}
+	
+	private static final IWordDetector implIWordDetector = new EnumImplIWordDetector(values());
+	
+	public static IWordDetector getWordDetector() {
+		return implIWordDetector;
 	}
 
 }

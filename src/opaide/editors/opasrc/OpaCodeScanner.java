@@ -32,7 +32,7 @@ public class OpaCodeScanner extends RuleBasedScanner {
 		
 		{	SavedTextAttribute attrForKeyword = styleProvider.getSavedTextAttribute(CODE.KEYWORD);
 			IToken keywordToken = new Token(new TextAttribute( ColorManager.getColor(attrForKeyword.getColor())));
-			WordRule keywordRule = new WordRule(OPAKEYWORDS.random());
+			WordRule keywordRule = new WordRule(OPAKEYWORDS.getWordDetector());
 			for (OPAKEYWORDS k : OPAKEYWORDS.values()) {
 				keywordRule.addWord(k.getTextRep(), keywordToken);
 			}
@@ -41,7 +41,7 @@ public class OpaCodeScanner extends RuleBasedScanner {
 		
 		{	SavedTextAttribute attrForSeparator = styleProvider.getSavedTextAttribute(CODE.SEPARATOR);
 			IToken separatorsToken = new Token(new TextAttribute( ColorManager.getColor(attrForSeparator.getColor())));
-			WordRule separatorsRule = new WordRule(SEPARATORS.random());
+			WordRule separatorsRule = new WordRule(SEPARATORS.getWordDetector());
 			for (SEPARATORS k : SEPARATORS.values()) {
 				separatorsRule.addWord(k.getTextRep(), separatorsToken);
 			}
