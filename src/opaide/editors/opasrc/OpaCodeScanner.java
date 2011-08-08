@@ -15,13 +15,51 @@ import org.eclipse.swt.graphics.RGB;
 public class OpaCodeScanner extends RuleBasedScanner {
 	
 	public enum CODE {
-		KEYWORD,
-		SEPARATOR,
-		GENERIC_WORD;
+		KEYWORD {
+			@Override
+			public IWordDetector getWordDetector() {
+				return OPAKEYWORDS.getWordDetector();
+			}
+			@Override
+			public ITextualRep[] getTextualReps() {
+				return OPAKEYWORDS.values();
+			}
+		},
+		SEPARATOR {
+			@Override
+			public IWordDetector getWordDetector() {
+				return OPASEPARATORS.getWordDetector();
+			}
+			@Override
+			public ITextualRep[] getTextualReps() {
+				return OPASEPARATORS.values();
+			}
+		},
+		GENERIC_WORD {
+			@Override
+			public IWordDetector getWordDetector() {
+				return new IWordDetector() {			
+					@Override
+					public boolean isWordStart(char c) {
+						return ((c=='_') || (c>='a' && c<='z') || (c>='A' && c<='Z'));
+					}			
+					@Override
+					public boolean isWordPart(char c) {
+						return ((c>='a' && c<='z') || (c>='A' && c<='Z') || (c>='0' && c<='9') || c=='_');
+					}
+				};
+			}
+			@Override
+			public ITextualRep[] getTextualReps() {
+				return null;
+			}
+		};
 		@Override
 		public String toString() {
 			return this.getClass().getCanonicalName() + "." + super.toString();
 		}
+		public abstract IWordDetector getWordDetector();
+		public abstract ITextualRep[] getTextualReps();
 	}
 	
 
@@ -33,7 +71,7 @@ public class OpaCodeScanner extends RuleBasedScanner {
 		{	SavedTextAttribute attrForKeyword = styleProvider.getSavedTextAttribute(CODE.KEYWORD);
 			IToken keywordToken = new Token(new TextAttribute( ColorManager.getColor(attrForKeyword.getColor())));
 			WordRule keywordRule = new WordRule(OPAKEYWORDS.getWordDetector());
-			for (OPAKEYWORDS k : OPAKEYWORDS.values()) {
+			for (ITextualRep k : OPAKEYWORDS.values()) {
 				keywordRule.addWord(k.getTextRep(), keywordToken);
 			}
 			rules.add(keywordRule);
