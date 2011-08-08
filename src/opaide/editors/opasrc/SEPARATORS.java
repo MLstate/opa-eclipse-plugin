@@ -26,7 +26,9 @@ public enum SEPARATORS implements IWordDetector {
 	SLASH ("/"),
 	DOT ("."),
 	EQUAL ("="),
-	NOTEQUAL ("!=");
+	NOTEQUAL ("!="),
+	BOOL_AND ("&&"),
+	BOOL_OR ("||");
 	
 	@Override
 	public String toString() {
