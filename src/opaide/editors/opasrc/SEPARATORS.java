@@ -45,11 +45,6 @@ public enum SEPARATORS implements IWordDetector {
 	public String getTextRep() {
 		return sub.getTextRep();
 	}
-		
-	public static SEPARATORS random() {
-		Random r = new Random();
-		return values()[r.nextInt(values().length)];
-	}
 	
 	public boolean isWordStart(char c) {
 		return sub.isWordStart(c);
@@ -57,6 +52,10 @@ public enum SEPARATORS implements IWordDetector {
 
 	public boolean isWordPart(char c) {
 		return sub.isWordPart(c);
+	}
+	
+	public static SEPARATORS random() {
+		return EnumRandom.random(values());
 	}
 
 }
