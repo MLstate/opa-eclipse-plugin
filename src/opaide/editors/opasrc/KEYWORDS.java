@@ -1,7 +1,5 @@
 package opaide.editors.opasrc;
 
-import java.util.Random;
-
 import org.eclipse.jface.text.rules.IWordDetector;
 
 public enum KEYWORDS implements IWordDetector {
@@ -31,12 +29,8 @@ public enum KEYWORDS implements IWordDetector {
 	FALSE,
 	OPEN;
 	
-	public static KEYWORDS random() {
-		Random r = new Random();
-		return values()[r.nextInt(values().length)];
-	}
-	
 	private final EnumImplIWordDetector sub;
+	
 	private KEYWORDS(String textualRep) {
 		this.sub = new EnumImplIWordDetector(this, textualRep);
 	}
@@ -57,4 +51,9 @@ public enum KEYWORDS implements IWordDetector {
 	public boolean isWordPart(char c) {
 		return sub.isWordPart(c);
 	}
+
+	public static KEYWORDS random() {
+		return EnumRandom.random(values());
+	}
+	
 }
