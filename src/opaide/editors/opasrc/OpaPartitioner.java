@@ -45,7 +45,7 @@ public class OpaPartitioner extends RuleBasedPartitionScanner {
 
 			@Override
 			public SavedTextAttribute getTextAttribute() {
-				return new SavedTextAttribute(new RGB(171, 74, 0), new FontData("Serif", 10, TextAttribute.STRIKETHROUGH));
+				return new SavedTextAttribute(new RGB(63, 127, 95), new FontData("Serif", 10, TextAttribute.STRIKETHROUGH));
 			}
 		},
 		OPA_COMMENT_BLOCK {
@@ -62,7 +62,7 @@ public class OpaPartitioner extends RuleBasedPartitionScanner {
 
 			@Override
 			public SavedTextAttribute getTextAttribute() {
-				return new SavedTextAttribute(new RGB(111, 48, 0), createDefaultFontData(SWT.NORMAL));
+				return new SavedTextAttribute(new RGB(63, 95, 191), createDefaultFontData(SWT.NORMAL));
 			}
 		};
 		

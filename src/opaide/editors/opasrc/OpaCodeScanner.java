@@ -34,7 +34,7 @@ public class OpaCodeScanner extends RuleBasedScanner {
 			}
 			@Override
 			public SavedTextAttribute getTextAttribute() {
-				return new SavedTextAttribute(new RGB(0, 255, 255), createFontData(SWT.BOLD));
+				return new SavedTextAttribute(new RGB(156, 0, 85), new FontData("Arial", 10, SWT.BOLD));
 			}
 		},
 		SEPARATOR {
