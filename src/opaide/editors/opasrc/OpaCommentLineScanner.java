@@ -3,6 +3,7 @@ package opaide.editors.opasrc;
 import java.util.ArrayList;
 import java.util.List;
 
+import opaide.OpaIdePlugin;
 import opaide.editors.ColorManager;
 import opaide.editors.opasrc.OpaPartitioner.OPA_PARTITION;
 import opaide.preferences.OpaPreferencesInitializer;
@@ -16,8 +17,8 @@ public class OpaCommentLineScanner extends RuleBasedScanner {
 	
 	public OpaCommentLineScanner(OpaPreferencesInitializer styleProvider) {
 		SavedTextAttribute c = styleProvider.getSavedTextAttribute(OPA_PARTITION.OPA_COMMENT_LINE);
-		System.out.println("OpaCommentLineScanner.OpaCommentLineScanner()" + " style= " + c.getStyle());
-		IToken commentLineToken = new Token(new TextAttribute( ColorManager.getColor(c.getColor()), null, c.getStyle()));
+		TextAttribute someTextAttribute = SavedTextAttribute.toTextAttribute(OpaIdePlugin.getDefault().getDisplay(), c);
+		IToken commentLineToken = new Token(someTextAttribute);
 		
 		List<IRule> rules = new ArrayList<IRule>();
 		//we got nothing to parse and colorize

@@ -4,15 +4,21 @@ import java.util.ArrayList;
 
 import java.util.List;
 
+import opaide.OpaIdePlugin;
 import opaide.editors.ColorManager;
 import opaide.preferences.OpaPreferencesInitializer;
 import opaide.preferences.OpaPreferencesInitializer.SavedTextAttribute;
 
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.jface.text.rules.*;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.RGB;
+import org.eclipse.ui.internal.dnd.SwtUtil;
+import org.eclipse.ui.internal.texteditor.SWTUtil;
 
 public class OpaCodeScanner extends RuleBasedScanner {
 	
@@ -113,8 +119,10 @@ public class OpaCodeScanner extends RuleBasedScanner {
 		
 		for (CODE c : CODE.values()) {
 			SavedTextAttribute attrForKeyword = styleProvider.getSavedTextAttribute(c);
-			IToken keywordToken = new Token(new TextAttribute( ColorManager.getColor(attrForKeyword.getColor()) ));
+			TextAttribute someTextAttribute = SavedTextAttribute.toTextAttribute(OpaIdePlugin.getDefault().getDisplay(), attrForKeyword);
+			IToken keywordToken = new Token(someTextAttribute);
 			ITextualRep[] values = c.getTextualReps();
+			
 			WordRule keywordRule = 
 					(values.length == 0) ? new WordRule(c.getWordDetector(), keywordToken) : new WordRule(c.getWordDetector());
 			for (ITextualRep k : values) {
