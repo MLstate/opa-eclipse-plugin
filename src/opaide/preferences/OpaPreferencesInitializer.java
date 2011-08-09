@@ -79,7 +79,7 @@ public class OpaPreferencesInitializer extends AbstractPreferenceInitializer {
 		}
 		
 		for (CODE c : CODE.values()) {
-			setDefaultTextAttribute(c.toString(), c.getDefaultRGB(), c.getDefaultFontData());
+			setDefaultTextAttribute(c.toString(), c.getTextAttribute().getColor(), c.getTextAttribute().getFontData());
 		}
 
 	}

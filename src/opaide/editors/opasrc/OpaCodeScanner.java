@@ -33,12 +33,8 @@ public class OpaCodeScanner extends RuleBasedScanner {
 				return OPAKEYWORDS.values();
 			}
 			@Override
-			public FontData getDefaultFontData() {
-				return createFontData(SWT.BOLD);
-			}
-			@Override
-			public RGB getDefaultRGB() {
-				return new RGB(0, 255, 255);
+			public SavedTextAttribute getTextAttribute() {
+				return new SavedTextAttribute(new RGB(0, 255, 255), createFontData(SWT.BOLD));
 			}
 		},
 		SEPARATOR {
@@ -51,12 +47,8 @@ public class OpaCodeScanner extends RuleBasedScanner {
 				return OPASEPARATORS.values();
 			}
 			@Override
-			public FontData getDefaultFontData() {
-				return createFontData(SWT.BOLD);
-			}
-			@Override
-			public RGB getDefaultRGB() {
-				return new RGB(124, 62, 71);
+			public SavedTextAttribute getTextAttribute() {
+				return new SavedTextAttribute(new RGB(124, 62, 71), createFontData(SWT.BOLD));
 			}
 		},
 		GENERIC_WORD {
@@ -78,12 +70,8 @@ public class OpaCodeScanner extends RuleBasedScanner {
 				return new ITextualRep[]{};
 			}
 			@Override
-			public FontData getDefaultFontData() {
-				return createFontData(SWT.NORMAL);
-			}
-			@Override
-			public RGB getDefaultRGB() {
-				return new RGB(20, 20, 20);
+			public SavedTextAttribute getTextAttribute() {
+				return new SavedTextAttribute(new RGB(20, 20, 20), createFontData(SWT.NORMAL));
 			}
 		};
 		
@@ -95,19 +83,13 @@ public class OpaCodeScanner extends RuleBasedScanner {
 		public abstract IWordDetector getWordDetector();
 		public abstract ITextualRep[] getTextualReps();
 		
-		public FontData getDefaultFontData() {
-			return createFontData(SWT.NORMAL);
-		}
+		public abstract SavedTextAttribute getTextAttribute();
 		
 		private static FontData createFontData(int style) {
 			FontData tmp = new FontData("Monospace", 10, style);
 			return tmp;
 		}
-		
-		public RGB getDefaultRGB() {
-			return new RGB(20, 20, 20);
-		}
-		
+				
 	}
 	
 

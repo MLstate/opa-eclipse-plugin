@@ -28,7 +28,7 @@ public class OpaPartitioner extends RuleBasedPartitionScanner {
 
 			@Override
 			public SavedTextAttribute getTextAttribute() {
-				return new SavedTextAttribute(new RGB(64, 144, 225), createDefaultFontData(SWT.ITALIC));
+				return new SavedTextAttribute(new RGB(64, 144, 225), new FontData("Georgia", 10, SWT.ITALIC));
 			}
 		},
 		OPA_COMMENT_LINE {
@@ -45,7 +45,7 @@ public class OpaPartitioner extends RuleBasedPartitionScanner {
 
 			@Override
 			public SavedTextAttribute getTextAttribute() {
-				return new SavedTextAttribute(new RGB(171, 74, 0), createDefaultFontData(TextAttribute.STRIKETHROUGH));
+				return new SavedTextAttribute(new RGB(171, 74, 0), new FontData("Serif", 10, TextAttribute.STRIKETHROUGH));
 			}
 		},
 		OPA_COMMENT_BLOCK {
