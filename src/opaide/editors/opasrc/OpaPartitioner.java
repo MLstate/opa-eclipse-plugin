@@ -4,8 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import opaide.preferences.OpaPreferencesInitializer;
+import opaide.preferences.OpaPreferencesInitializer.SavedTextAttribute;
 
+import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.jface.text.rules.*;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.FontData;
+import org.eclipse.swt.graphics.RGB;
 
 public class OpaPartitioner extends RuleBasedPartitionScanner {
 	public enum OPA_PARTITION {
@@ -20,6 +25,11 @@ public class OpaPartitioner extends RuleBasedPartitionScanner {
 			public ITokenScanner getTokenScanner(OpaPreferencesInitializer styleProvider) {
 				return new OpaStringScanner(styleProvider);
 			}
+
+			@Override
+			public SavedTextAttribute getTextAttribute() {
+				return new SavedTextAttribute(new RGB(64, 144, 225), createDefaultFontData(SWT.ITALIC));
+			}
 		},
 		OPA_COMMENT_LINE {
 			@Override
@@ -32,6 +42,11 @@ public class OpaPartitioner extends RuleBasedPartitionScanner {
 			public ITokenScanner getTokenScanner(OpaPreferencesInitializer styleProvider) {
 				return new OpaCommentLineScanner(styleProvider);
 			}
+
+			@Override
+			public SavedTextAttribute getTextAttribute() {
+				return new SavedTextAttribute(new RGB(171, 74, 0), createDefaultFontData(TextAttribute.STRIKETHROUGH));
+			}
 		},
 		OPA_COMMENT_BLOCK {
 			@Override
@@ -43,6 +58,11 @@ public class OpaPartitioner extends RuleBasedPartitionScanner {
 			@Override
 			public ITokenScanner getTokenScanner(OpaPreferencesInitializer styleProvider) {
 				return new OpaCommentBlockScanner(styleProvider);
+			}
+
+			@Override
+			public SavedTextAttribute getTextAttribute() {
+				return new SavedTextAttribute(new RGB(111, 48, 0), createDefaultFontData(SWT.NORMAL));
 			}
 		};
 		
@@ -68,6 +88,11 @@ public class OpaPartitioner extends RuleBasedPartitionScanner {
 		
 		public abstract IPredicateRule getPredicateRule();
 		public abstract ITokenScanner getTokenScanner(OpaPreferencesInitializer styleProvider);
+		public abstract SavedTextAttribute getTextAttribute();
+		
+		private static FontData createDefaultFontData(int style) {
+			return new FontData("Monospace", 10, style);
+		}
 
 	};
 	

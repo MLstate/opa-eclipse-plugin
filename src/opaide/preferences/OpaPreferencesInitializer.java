@@ -21,16 +21,11 @@ import org.eclipse.swt.graphics.RGB;
 public class OpaPreferencesInitializer extends AbstractPreferenceInitializer {
 	
 	public static class SavedTextAttribute {
-		private int style;
 		private RGB color;
 		private FontData fontData;
-		public SavedTextAttribute(RGB color, int style, FontData fontData) {
-			this.style = style;
+		public SavedTextAttribute(RGB color, FontData fontData) {
 			this.color = color;
 			this.fontData = fontData;
-		}
-		public int getStyle() {
-			return style;
 		}
 		public RGB getColor() {
 			return color;
@@ -55,17 +50,11 @@ public class OpaPreferencesInitializer extends AbstractPreferenceInitializer {
 		PreferenceConverter.setDefault(store, parent+suffix_font_data, font);
 	}
 	
-	private void storeSavedTextAttribute(String parent, SavedTextAttribute sta) {
-		FontData tmp = new FontData("Monospace", 10, sta.getStyle());
-		
-		setDefaultTextAttribute(parent, sta.getColor(), tmp);
-	};
-	
 	private  SavedTextAttribute readSavedTextAttribute(String parent) {
 		RGB c = PreferenceConverter.getColor(store, parent+suffix_color);
 		FontData fd = PreferenceConverter.getFontData(store, parent+suffix_font_data);
 		/*System.out.println("PreferencesInitializer.readSavedTextAttribute()" + " reading style=" + fd.getStyle() + " for " + parent);*/
-		return new SavedTextAttribute(c, fd.getStyle(), fd);
+		return new SavedTextAttribute(c, fd);
 	}
 
 	private static IPreferenceStore store;
@@ -86,17 +75,7 @@ public class OpaPreferencesInitializer extends AbstractPreferenceInitializer {
 		store.setDefault(OpaPreferencesConstants.P_OPA_COMPILER_PATH, "/usr/bin/opa");
 				
 		for (OPA_PARTITION p : OPA_PARTITION.values()) {
-			switch (p) {
-			case OPA_STRING:
-				storeSavedTextAttribute(p.toString(), new SavedTextAttribute(new RGB(64, 144, 225), SWT.ITALIC, new FontData()));
-				break;
-			case OPA_COMMENT_LINE:
-				storeSavedTextAttribute(p.toString(), new SavedTextAttribute(new RGB(171, 74, 0), TextAttribute.STRIKETHROUGH, new FontData()));
-				break;
-			case OPA_COMMENT_BLOCK:
-				storeSavedTextAttribute(p.toString(), new SavedTextAttribute(new RGB(111, 48, 0), SWT.NORMAL, new FontData()));
-				break;
-			}
+			setDefaultTextAttribute(p.toString(), p.getTextAttribute().getColor(), p.getTextAttribute().getFontData());
 		}
 		
 		for (CODE c : CODE.values()) {

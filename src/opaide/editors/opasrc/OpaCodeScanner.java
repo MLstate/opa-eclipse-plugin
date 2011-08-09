@@ -100,9 +100,8 @@ public class OpaCodeScanner extends RuleBasedScanner {
 		}
 		
 		private static FontData createFontData(int style) {
-			FontData fd = new FontData();
-			fd.setStyle(style);
-			return fd;
+			FontData tmp = new FontData("Monospace", 10, style);
+			return tmp;
 		}
 		
 		public RGB getDefaultRGB() {
