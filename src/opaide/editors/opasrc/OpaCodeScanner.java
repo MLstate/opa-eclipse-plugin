@@ -89,6 +89,10 @@ public class OpaCodeScanner extends RuleBasedScanner {
 			FontData tmp = new FontData("Monospace", 10, style);
 			return tmp;
 		}
+		
+		public static SavedTextAttribute getDefaultTextAttribute() {
+			return new SavedTextAttribute(new RGB(100, 100, 100), createFontData(SWT.NORMAL));
+		}
 				
 	}
 	
@@ -114,7 +118,7 @@ public class OpaCodeScanner extends RuleBasedScanner {
 
 		IRule[] result = new IRule[rules.size()];
 		rules.toArray(result);
-		IToken defaultToken = new Token(new TextAttribute(ColorManager.getColor(new RGB(0, 255, 0))));
+		IToken defaultToken = new Token(SavedTextAttribute.toTextAttribute(OpaIdePlugin.getDefault().getDisplay(), CODE.getDefaultTextAttribute()));
 		setDefaultReturnToken(defaultToken);
 		setRules(result);
 	}
