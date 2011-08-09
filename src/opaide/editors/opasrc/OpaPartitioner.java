@@ -7,9 +7,27 @@ import org.eclipse.jface.text.rules.*;
 
 public class OpaPartitioner extends RuleBasedPartitionScanner {
 	public enum OPA_PARTITION {
-		OPA_STRING,
-		OPA_COMMENT_LINE,
-		OPA_COMMENT_BLOCK;
+		OPA_STRING {
+			@Override
+			public IPredicateRule getPredicateRule() {
+				IToken token = new Token(this.getContentType());
+				return new MultiLineRule("\"", "\"", token, '\\');
+			}
+		},
+		OPA_COMMENT_LINE {
+			@Override
+			public IPredicateRule getPredicateRule() {
+				IToken token = new Token(this.getContentType());
+				return new EndOfLineRule("//", token);
+			}
+		},
+		OPA_COMMENT_BLOCK {
+			@Override
+			public IPredicateRule getPredicateRule() {
+				IToken token = new Token(this.getContentType());
+				return new MultiLineRule("/*", "*/", token);
+			}
+		};
 		
 		@Override
 		public String toString() {
@@ -30,19 +48,16 @@ public class OpaPartitioner extends RuleBasedPartitionScanner {
 			}
 			return contentTypes;
 		}
+		
+		public abstract IPredicateRule getPredicateRule();
 	};
 	
 	public OpaPartitioner() {
-		List<IPredicateRule> rules = new ArrayList<IPredicateRule>();
+		final List<IPredicateRule> rules = new ArrayList<IPredicateRule>();
 		
-		IToken opaString = new Token(OPA_PARTITION.OPA_STRING.getContentType());
-		rules.add(new MultiLineRule("\"", "\"", opaString, '\\'));
-		
-		IToken opaCommentLine = new Token(OPA_PARTITION.OPA_COMMENT_LINE.getContentType());
-		rules.add(new EndOfLineRule("//", opaCommentLine));
-		
-		IToken opaCommentBlock = new Token(OPA_PARTITION.OPA_COMMENT_BLOCK.getContentType());
-		rules.add(new MultiLineRule("/*", "*/", opaCommentBlock));
+		for (OPA_PARTITION p : OPA_PARTITION.values()) {
+			rules.add(p.getPredicateRule());
+		}
 		
 		IPredicateRule[] result= rules.toArray(new IPredicateRule[rules.size()]);
 		setPredicateRules(result);
