@@ -83,18 +83,9 @@ public class OpaPreferencesInitializer extends AbstractPreferenceInitializer {
 		}
 		
 		for (CODE c : CODE.values()) {
-			switch (c) {
-			case KEYWORD:
-				storeSavedTextAttribute(c.toString(), new SavedTextAttribute(new RGB(0, 255, 255), SWT.BOLD));
-				break;
-			case SEPARATOR:
-				storeSavedTextAttribute(c.toString(), new SavedTextAttribute(new RGB(124, 62, 71), SWT.BOLD));
-				break;
-			case GENERIC_WORD:
-				storeSavedTextAttribute(c.toString(), new SavedTextAttribute(new RGB(20, 20, 20), SWT.NORMAL));
-				break;
-			}
+			storeSavedTextAttribute(c.toString(), new SavedTextAttribute(c.getDefaultRGB(), c.getDefaultFontData().getStyle()));
 		}
+
 	}
 	
 	public SavedTextAttribute getSavedTextAttribute(OPA_PARTITION p) {

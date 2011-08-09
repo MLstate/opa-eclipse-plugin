@@ -10,6 +10,8 @@ import opaide.preferences.OpaPreferencesInitializer.SavedTextAttribute;
 
 import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.jface.text.rules.*;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.RGB;
 
 public class OpaCodeScanner extends RuleBasedScanner {
@@ -24,6 +26,14 @@ public class OpaCodeScanner extends RuleBasedScanner {
 			public ITextualRep[] getTextualReps() {
 				return OPAKEYWORDS.values();
 			}
+			@Override
+			public FontData getDefaultFontData() {
+				return createFontData(SWT.BOLD);
+			}
+			@Override
+			public RGB getDefaultRGB() {
+				return new RGB(0, 255, 255);
+			}
 		},
 		SEPARATOR {
 			@Override
@@ -33,6 +43,14 @@ public class OpaCodeScanner extends RuleBasedScanner {
 			@Override
 			public ITextualRep[] getTextualReps() {
 				return OPASEPARATORS.values();
+			}
+			@Override
+			public FontData getDefaultFontData() {
+				return createFontData(SWT.BOLD);
+			}
+			@Override
+			public RGB getDefaultRGB() {
+				return new RGB(124, 62, 71);
 			}
 		},
 		GENERIC_WORD {
@@ -53,6 +71,14 @@ public class OpaCodeScanner extends RuleBasedScanner {
 			public ITextualRep[] getTextualReps() {
 				return new ITextualRep[]{};
 			}
+			@Override
+			public FontData getDefaultFontData() {
+				return createFontData(SWT.NORMAL);
+			}
+			@Override
+			public RGB getDefaultRGB() {
+				return new RGB(20, 20, 20);
+			}
 		};
 		
 		@Override
@@ -62,6 +88,20 @@ public class OpaCodeScanner extends RuleBasedScanner {
 		
 		public abstract IWordDetector getWordDetector();
 		public abstract ITextualRep[] getTextualReps();
+		
+		public FontData getDefaultFontData() {
+			return createFontData(SWT.NORMAL);
+		}
+		
+		private static FontData createFontData(int style) {
+			FontData fd = new FontData();
+			fd.setStyle(style);
+			return fd;
+		}
+		
+		public RGB getDefaultRGB() {
+			return new RGB(20, 20, 20);
+		}
 		
 	}
 	
