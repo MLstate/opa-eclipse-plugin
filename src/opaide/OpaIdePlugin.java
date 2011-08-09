@@ -11,6 +11,7 @@ import opaide.editors.messages.ast.OpaMessage;
 import opaide.editors.messages.ast.OpaNewCompilationLaunched;
 import opaide.preferences.OpaPreferencesInitializer;
 
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.console.ConsolePlugin;
 import org.eclipse.ui.console.IConsole;
 import org.eclipse.ui.console.IConsoleManager;
@@ -90,5 +91,14 @@ public class OpaIdePlugin extends AbstractUIPlugin {
 	
 	private OpaMessagesBank myOpaMessagesBank = new OpaMessagesBank();	
 	public OpaMessagesBank getOpaMessagesBank(){ return myOpaMessagesBank; };
+	
+	public Display getDisplay() {
+		Display display = Display.getCurrent();
+	    //may be null if outside the UI thread
+	    if (display == null) {
+	    	display = Display.getDefault();
+	    }
+	    return display;
+	}
 	
 }
