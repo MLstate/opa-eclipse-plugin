@@ -46,18 +46,12 @@ public class OpaConfiguration extends SourceViewerConfiguration {
         reconciler.setDamager(dr, IDocument.DEFAULT_CONTENT_TYPE);
         reconciler.setRepairer(dr, IDocument.DEFAULT_CONTENT_TYPE);
         
-        DefaultDamagerRepairer drForString = new DefaultDamagerRepairer(new OpaStringScanner(styleProvider));
-        reconciler.setDamager(drForString, OPA_PARTITION.OPA_STRING.getContentType());
-        reconciler.setRepairer(drForString, OPA_PARTITION.OPA_STRING.getContentType());
-        
-        DefaultDamagerRepairer drForCommentLine = new DefaultDamagerRepairer(new OpaCommentLineScanner(styleProvider));
-        reconciler.setDamager(drForCommentLine, OPA_PARTITION.OPA_COMMENT_LINE.getContentType());
-        reconciler.setRepairer(drForCommentLine, OPA_PARTITION.OPA_COMMENT_LINE.getContentType());
-        
-        DefaultDamagerRepairer drForCommentBlock = new DefaultDamagerRepairer(new OpaCommentBlockScanner(styleProvider));
-        reconciler.setDamager(drForCommentBlock, OPA_PARTITION.OPA_COMMENT_BLOCK.getContentType());
-        reconciler.setRepairer(drForCommentBlock, OPA_PARTITION.OPA_COMMENT_BLOCK.getContentType());
-        
+        for (OPA_PARTITION p : OPA_PARTITION.values()) {
+        	DefaultDamagerRepairer ddr = new DefaultDamagerRepairer(p.getTokenScanner(styleProvider));
+        	reconciler.setDamager(ddr, p.getContentType());
+        	reconciler.setRepairer(ddr, p.getContentType());
+        }
+
 		return reconciler;
 	}
 	

@@ -3,6 +3,8 @@ package opaide.editors.opasrc;
 import java.util.ArrayList;
 import java.util.List;
 
+import opaide.preferences.OpaPreferencesInitializer;
+
 import org.eclipse.jface.text.rules.*;
 
 public class OpaPartitioner extends RuleBasedPartitionScanner {
@@ -13,6 +15,11 @@ public class OpaPartitioner extends RuleBasedPartitionScanner {
 				IToken token = new Token(this.getContentType());
 				return new MultiLineRule("\"", "\"", token, '\\');
 			}
+
+			@Override
+			public ITokenScanner getTokenScanner(OpaPreferencesInitializer styleProvider) {
+				return new OpaStringScanner(styleProvider);
+			}
 		},
 		OPA_COMMENT_LINE {
 			@Override
@@ -20,12 +27,22 @@ public class OpaPartitioner extends RuleBasedPartitionScanner {
 				IToken token = new Token(this.getContentType());
 				return new EndOfLineRule("//", token);
 			}
+
+			@Override
+			public ITokenScanner getTokenScanner(OpaPreferencesInitializer styleProvider) {
+				return new OpaCommentLineScanner(styleProvider);
+			}
 		},
 		OPA_COMMENT_BLOCK {
 			@Override
 			public IPredicateRule getPredicateRule() {
 				IToken token = new Token(this.getContentType());
 				return new MultiLineRule("/*", "*/", token);
+			}
+
+			@Override
+			public ITokenScanner getTokenScanner(OpaPreferencesInitializer styleProvider) {
+				return new OpaCommentBlockScanner(styleProvider);
 			}
 		};
 		
@@ -50,6 +67,8 @@ public class OpaPartitioner extends RuleBasedPartitionScanner {
 		}
 		
 		public abstract IPredicateRule getPredicateRule();
+		public abstract ITokenScanner getTokenScanner(OpaPreferencesInitializer styleProvider);
+
 	};
 	
 	public OpaPartitioner() {
