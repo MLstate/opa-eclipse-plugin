@@ -1,0 +1,43 @@
+1* Developing
+
+You need a basic version of eclipse 3.7 (Indigo).
+The plugin relies only on eclipse feature and doesn't use external source.
+Given so the classic "run" command in eclipse in enough to launch the plugin.
+
+
+
+2* Serious refactoring todo
+
+- The "opaide.editors.builder.OpaProgramLaunchDelegate" is a copy and paste of 
+  the eclipse class 
+  'org.eclipse.core.externaltools.internal.launchConfigurations.ProgramLaunchDelegate'
+  The reason is: we need to have an access to the launched process and his
+  console output to parse the opa compiler message.
+  Recoding from scratch this class can be a solution.
+  
+  OR the extension point:
+    org.eclipse.ui.console.consolePatternMatchListeners
+    org.eclipse.ui.console.consoleLineTrackers
+  can be used to resolve this problem.
+
+
+- the plugin is 'stealing' some eclipse class for GUI (like 
+  'opaide.editors.builder.OpaProgramBuilderTabGroup', ...). Recoding this views
+  is possible but take time.
+
+
+- a lot of code could be remove if the simplify marker system is good enough
+  in "OpaMessageBank"
+
+
+
+3* Annoying unresolved bug
+
+The "OpaProjectNature" class in used when a new Opa project is created. With 
+this, the "configure" method must be called automatically by eclipse when we 
+setup the project in
+"opaide.editors.wizard.OpaNewProjectWizard.performFinish()" 
+(~ project.setDescription(description, null); ).
+
+My guess is that as we reuse the "BasicNewProjectResourceWizard" and it mess
+thing a little. A fix could be to re-implement this class from scratch.
