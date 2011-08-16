@@ -27,7 +27,7 @@ public class OpaMessagesBank {
 	private IOpaMessageListener myOpaMessageListener = new IOpaMessageListener() {		
 		@Override
 		public void newMessage(OpaMessage someEvt) {
-			addMessage(someEvt);
+			addMessage2(someEvt);
 		}
 	};
 	public IOpaMessageListener getOpaMessageListener(){ return myOpaMessageListener; };
@@ -47,9 +47,39 @@ public class OpaMessagesBank {
 		}
 	}
 	
+	private void addMessage2(OpaMessage omsg) {
+		IProject theTargetProject = omsg.getProject();
+		if (omsg instanceof OpaNewCompilationLaunched) {
+			try {
+				for (IMarker m : theTargetProject.findMarkers(null, true, IResource.DEPTH_INFINITE)) {
+					m.delete();
+				}
+			} catch (CoreException e) {
+				e.printStackTrace();
+			}
+		} else if (omsg instanceof OpaErrorMessage) {
+			OpaErrorMessage errorMsg = (OpaErrorMessage) omsg;
+			IMarker marker;
+			try {
+				marker = errorMsg.getOpaSrcLocation().getTheFile().createMarker(IMarker.PROBLEM);		
+				if (! marker.exists()) { return; };
+				marker.setAttribute(IMarker.MESSAGE, "Error:" + "\n" + errorMsg.getRawErrorMsg());
+				marker.setAttribute(IMarker.CHAR_START, errorMsg.getOpaSrcLocation().getGlobalCharStart());
+				marker.setAttribute(IMarker.CHAR_END, errorMsg.getOpaSrcLocation().getGlobalCharEnd());
+				marker.setAttribute(IMarker.SEVERITY, new Integer(IMarker.SEVERITY_ERROR));
+				marker.setAttribute(IMarker.TRANSIENT, Boolean.TRUE);
+				marker.setAttribute(IMarker.LINE_NUMBER, errorMsg.getOpaSrcLocation().getTheLine());
+				marker.setAttribute(OpaSrcEditor.RAWMSGKEY, errorMsg.getRawErrorMsg());
+			} catch (CoreException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
 	private void addMessage(OpaMessage omsg) {
 		System.out.println("OpaMessagesBank.addMessage()");
-		IProject theTargetProject = omsg.getProject(); 
+		IProject theTargetProject = omsg.getProject();
 		initializeProject(theTargetProject);
 		// we must add a message to a specific resource
 		HashMap<IResource, List<OpaMessage>> target = retrieveMessagesForProject(theTargetProject);
